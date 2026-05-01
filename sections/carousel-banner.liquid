@@ -1,0 +1,247 @@
+{{ 'carousel-banner.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'carousel-banner.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div
+    class="carousel-banner section-{{ section.id }}-padding{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+    id="CarouselBanner-{{ section.id }}"
+    data-autoplay="{{ section.settings.auto_rotate }}"
+    data-speed="{{ section.settings.change_slides_speed }}"
+    role="region"
+    aria-label="{{ section.settings.accessibility_info | escape }}"
+    aria-roledescription="carousel"
+  >
+    {%- if section.blocks.size > 0 -%}
+      <div class="carousel-banner__track" id="CarouselTrack-{{ section.id }}" aria-live="polite">
+        {%- for block in section.blocks -%}
+          <div
+            class="carousel-banner__slide{% if forloop.first %} is-active{% endif %}"
+            {{ block.shopify_attributes }}
+            role="group"
+            aria-roledescription="slide"
+            aria-label="{{ forloop.index }} / {{ forloop.length }}"
+          >
+            <div class="carousel-banner__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1500
+                  | image_tag:
+                    loading: 'lazy',
+                    class: 'carousel-banner__image',
+                    widths: '375, 750, 1100, 1500',
+                    sizes: '100vw',
+                    alt: block.settings.image.alt | escape
+                }}
+              {%- elsif block.settings.asset_image != blank -%}
+                <img
+                  src="{{ block.settings.asset_image | asset_url }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  class="carousel-banner__image"
+                  loading="lazy"
+                  width="1500"
+                  height="600"
+                >
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'carousel-banner__placeholder-image' }}
+              {%- endif -%}
+            </div>
+
+            <div class="carousel-banner__content page-width">
+              {%- unless block.settings.heading == blank -%}
+                <h2 class="carousel-banner__heading h1">{{ block.settings.heading | escape }}</h2>
+              {%- endunless -%}
+              {%- unless block.settings.subheading == blank -%}
+                <p class="carousel-banner__subheading">{{ block.settings.subheading | escape }}</p>
+              {%- endunless -%}
+              {%- unless block.settings.button_label == blank -%}
+                <a href="{{ block.settings.button_link }}" class="button">
+                  {{ block.settings.button_label | escape }}
+                </a>
+              {%- endunless -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <button
+          type="button"
+          class="carousel-banner__btn carousel-banner__btn--prev"
+          aria-label="Previous slide"
+          aria-controls="CarouselTrack-{{ section.id }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+            <path d="M12 3L6 9l6 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="carousel-banner__btn carousel-banner__btn--next"
+          aria-label="Next slide"
+          aria-controls="CarouselTrack-{{ section.id }}"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+            <path d="M6 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="carousel-banner__dots" role="tablist" aria-label="Slides">
+          {%- for block in section.blocks -%}
+            <button
+              type="button"
+              class="carousel-banner__dot{% if forloop.first %} is-active{% endif %}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              aria-label="Slide {{ forloop.index }}"
+              aria-controls="CarouselTrack-{{ section.id }}"
+              data-index="{{ forloop.index0 }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      <div class="carousel-banner__empty page-width">
+        <p>Add slides in the theme editor.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Carousel Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slides every",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "accessibility_info",
+      "label": "Accessibility label",
+      "default": "Homepage carousel"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "asset_image",
+          "label": "Asset image filename",
+          "info": "Filename from theme assets (e.g. b1.jpg). Used when no image is selected above."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "New Collection"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Discover our latest arrivals"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carousel Banner",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Summer Collection",
+            "subheading": "Explore fresh styles for the season",
+            "button_label": "Shop now",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "New Arrivals",
+            "subheading": "Be the first to own our latest picks",
+            "button_label": "View all",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -9,281 +9,95 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "shop_range": {
+      "type": "shop-range",
       "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
+        "col_1": { "type": "collection", "settings": { "collection": "sweets", "label": "" } },
+        "col_2": { "type": "collection", "settings": { "collection": "namkeen", "label": "" } },
+        "col_3": { "type": "collection", "settings": { "collection": "gifting", "label": "" } }
       },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+      "block_order": ["col_1", "col_2", "col_3"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
-        "mobile_content_alignment": "center",
-        "show_text_below": false
-      }
-    },
-    "slideshow_XCWY4Y": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_EptBhY": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/b1_84f4e546-df83-4181-b57e-82d70061c97d.jpg",
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "",
-            "button_label": "Order Now",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        },
-        "slide_LieURk": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/b2_f8213585-98ba-4e2c-ba4d-c24818dc5832.jpg",
-            "image_overlay_opacity": 0,
-            "heading": "Slide 2",
-            "heading_size": "h1",
-            "subheading": "Second image",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_EptBhY",
-        "slide_LieURk"
-      ],
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand"
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "title": "Shop Our Range",
+        "text_align": "left",
+        "show_product_count": true,
+        "image_ratio": "3 / 4",
+        "border_radius": 12,
+        "columns_desktop": 3,
+        "columns_mobile": "2",
+        "background_color": "#ffffff",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "title": "Our Products",
+        "heading_size": "h1",
         "collection": "all",
         "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
         "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
         "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
+        "show_view_all": true,
+        "swipe_on_mobile": false,
+        "image_ratio": "square",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
         "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 28,
+        "padding_top": 36,
         "padding_bottom": 36
       }
     },
-    "collage": {
-      "type": "collage",
+    "carousel_banner": {
+      "type": "carousel-banner",
       "blocks": {
-        "collection-0": {
-          "type": "collection",
+        "slide_1": {
+          "type": "slide",
           "settings": {
-            "collection": ""
+            "asset_image": "b1.jpg",
+            "heading": "Freshly Baked Every Day",
+            "subheading": "Donuts, cookies, muffins and more — made with love",
+            "button_label": "Shop Bakery",
+            "button_link": "shopify://collections/all"
           }
         },
-        "product": {
-          "type": "product",
+        "slide_2": {
+          "type": "slide",
           "settings": {
-            "product": "",
-            "second_image": false
+            "asset_image": "b2.jpg",
+            "heading": "Traditional Indian Sweets",
+            "subheading": "Handcrafted mithai for every celebration",
+            "button_label": "Explore Sweets",
+            "button_link": "shopify://collections/all"
           }
         },
-        "collection-1": {
-          "type": "collection",
+        "slide_3": {
+          "type": "slide",
           "settings": {
-            "collection": ""
+            "asset_image": "sweets-2.jpg",
+            "heading": "Premium Confections",
+            "subheading": "A world of flavours — gifted, shared, savoured",
+            "button_label": "View All",
+            "button_link": "shopify://collections/all"
           }
         }
       },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
+      "block_order": ["slide_1", "slide_2", "slide_3"],
       "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "enable_video_looping": false,
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
-      "settings": {
-        "title": "",
-        "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "color_scheme": "scheme-3",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "accessibility_info": "Homepage carousel",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
   "order": [
-    "image_banner",
-    "slideshow_XCWY4Y",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "carousel_banner",
+    "shop_range",
+    "featured_collection"
   ]
 }
