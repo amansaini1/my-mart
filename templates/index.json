@@ -101,7 +101,7 @@
       ],
       "settings": {
         "title": "Shop Our Range",
-        "text_align": "left",
+        "text_align": "center",
         "show_product_count": true,
         "image_ratio": "3 / 4",
         "border_radius": 12,
