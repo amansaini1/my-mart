@@ -22,6 +22,10 @@
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
+                {%- assign normalized_link_title = link.title | strip | downcase -%}
+                {%- if normalized_link_title == 'chak now' -%}
+                  {% continue %}
+                {%- endif -%}
                 <li>
                   {%- if link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">

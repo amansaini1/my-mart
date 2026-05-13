@@ -8,6 +8,10 @@
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
+      {%- assign normalized_link_title = link.title | strip | downcase -%}
+      {%- if normalized_link_title == 'chak now' -%}
+        {% continue %}
+      {%- endif -%}
       <li>
         {%- if link.links != blank -%}
           <header-menu>
