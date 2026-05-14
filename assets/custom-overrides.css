@@ -1,0 +1,68 @@
+/* ============================================================
+   Custom overrides — Om Sweets aesthetic
+   ============================================================ */
+
+/* --- Announcement bar — dark gold strip --- */
+.utility-bar {
+  background: #7d6b00 !important;
+}
+.utility-bar .announcement-bar__message,
+.utility-bar .announcement-bar__link,
+.utility-bar p,
+.utility-bar span {
+  color: #ffffff !important;
+}
+
+/* --- Nav CTA pill button (Chak Now) --- */
+.header-cta-button {
+  background: #6b1a1a;
+  color: #ffffff !important;
+  border-radius: 40px;
+  padding: 0.75rem 2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none !important;
+  white-space: nowrap;
+  line-height: 1;
+  transition: background 0.2s ease;
+}
+
+.header-cta-button:hover {
+  background: #8b2222;
+  color: #ffffff !important;
+}
+
+.header-cta-button--mobile {
+  margin: 0.8rem 0;
+  padding: 1rem 2rem;
+}
+
+/* --- Hover-reveal Add to Cart on product cards --- */
+.card-wrapper .quick-add {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.card-wrapper:hover .quick-add,
+.card-wrapper:focus-within .quick-add {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Image hover zoom on product cards --- */
+.card__media .motion-reduce {
+  transition: transform 0.4s ease;
+}
+
+.card-wrapper:hover .card__media .motion-reduce {
+  transform: scale(1.04);
+}
+
+/* --- Footer cream background --- */
+.footer,
+.section-footer > div,
+footer.color-scheme-1 {
+  background: #fffae6 !important;
+}
