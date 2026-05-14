@@ -1,0 +1,254 @@
+/* carousel-banner.css */
+
+/* ── Container ─────────────────────────────────────── */
+.carousel-banner {
+  position: relative;
+  overflow: hidden;
+  background: #111;
+}
+
+/* ── Track: stacked slides, fade transition ────────── */
+.carousel-banner__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-banner__slide {
+  position: absolute;
+  inset: 0;
+  min-height: 48rem;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  pointer-events: none;
+}
+
+.carousel-banner__slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  position: relative;
+}
+
+@media screen and (min-width: 750px) {
+  .carousel-banner__slide {
+    min-height: 90vh;
+    max-height: 72rem;
+  }
+}
+
+/* ── Ken Burns zoom on active image ───────────────── */
+.carousel-banner__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.carousel-banner__image,
+.carousel-banner__placeholder-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.08);
+  transition: transform 7s ease;
+}
+
+.carousel-banner__slide.is-active .carousel-banner__image {
+  transform: scale(1);
+}
+
+/* ── Rich gradient overlay ─────────────────────────── */
+.carousel-banner__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.28) 55%,
+      rgba(0, 0, 0, 0.08) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.45) 0%,
+      transparent 50%
+    );
+}
+
+/* ── Content ────────────────────────────────────────── */
+.carousel-banner__content {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 1.5rem;
+  color: #fff;
+  max-width: 64rem;
+}
+
+@media screen and (min-width: 750px) {
+  .carousel-banner__content {
+    padding: 6rem 0;
+  }
+}
+
+/* Slide-up entrance on active slide */
+.carousel-banner__heading,
+.carousel-banner__subheading,
+.carousel-banner__content .button {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.carousel-banner__slide.is-active .carousel-banner__heading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+.carousel-banner__slide.is-active .carousel-banner__subheading {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
+}
+
+.carousel-banner__slide.is-active .carousel-banner__content .button {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.58s;
+}
+
+.carousel-banner__heading {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  line-height: 1.15;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.02em;
+}
+
+@media screen and (min-width: 750px) {
+  .carousel-banner__heading {
+    font-size: 6rem;
+  }
+}
+
+.carousel-banner__subheading {
+  font-size: 1.6rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (min-width: 750px) {
+  .carousel-banner__subheading {
+    font-size: 1.9rem;
+  }
+}
+
+/* ── CTA button ─────────────────────────────────────── */
+.carousel-banner__content .button {
+  background: #fff;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 40px;
+  padding: 1.4rem 3.2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.carousel-banner__content .button:hover {
+  background: #b39402;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* ── Arrow buttons ──────────────────────────────────── */
+.carousel-banner__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, border-color 0.25s, transform 0.2s;
+  opacity: 0;
+}
+
+.carousel-banner:hover .carousel-banner__btn {
+  opacity: 1;
+}
+
+.carousel-banner__btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+  border-color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-banner__btn svg {
+  width: 2rem;
+  height: 2rem;
+  stroke-width: 2;
+}
+
+.carousel-banner__btn--prev { left: 2rem; }
+.carousel-banner__btn--next { right: 2rem; }
+
+@media screen and (min-width: 750px) {
+  .carousel-banner__btn--prev { left: 3.2rem; }
+  .carousel-banner__btn--next { right: 3.2rem; }
+}
+
+/* ── Pill progress dots ─────────────────────────────── */
+.carousel-banner__dots {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.6rem;
+  z-index: 3;
+  align-items: center;
+}
+
+.carousel-banner__dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 40px;
+  border: none;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  padding: 0;
+  transition: width 0.35s ease, background 0.35s ease;
+}
+
+.carousel-banner__dot.is-active {
+  width: 2.8rem;
+  background: #fff;
+}
+
+/* ── Empty state ─────────────────────────────────────── */
+.carousel-banner__empty {
+  padding: 4rem 0;
+  text-align: center;
+  color: inherit;
+}
