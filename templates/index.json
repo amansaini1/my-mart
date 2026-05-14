@@ -14,9 +14,10 @@
       "blocks": {
         "col_1": { "type": "collection", "settings": { "collection": "sweets", "label": "", "custom_image": "collection-sweets.webp" } },
         "col_2": { "type": "collection", "settings": { "collection": "namkeen", "label": "", "custom_image": "collection-namkeen.webp" } },
-        "col_3": { "type": "collection", "settings": { "collection": "gifting", "label": "", "custom_image": "collection-gifting.webp" } }
+        "col_3": { "type": "collection", "settings": { "collection": "gifting", "label": "", "custom_image": "collection-gifting.webp" } },
+        "col_4": { "type": "collection", "settings": { "collection": "bakery", "label": "Bakery", "custom_image": "" } }
       },
-      "block_order": ["col_1", "col_2", "col_3"],
+      "block_order": ["col_1", "col_2", "col_3", "col_4"],
       "settings": {
         "title": "Shop Our Range",
         "text_align": "left",
