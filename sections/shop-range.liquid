@@ -13,13 +13,27 @@
     letter-spacing: -0.02em;
   }
 
+  .shop-range__scroll-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .shop-range__scroll-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
   .shop-range__grid {
-    display: grid;
-    grid-template-columns: repeat({{ section.settings.columns_desktop }}, 1fr);
+    display: flex;
+    flex-wrap: nowrap;
     gap: 2.4rem;
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 1.2rem;
+  }
+
+  .shop-range__grid > li {
+    flex: 0 0 28rem;
   }
 
   .shop-range__card {
@@ -83,12 +97,11 @@
   }
 
   @media screen and (max-width: 989px) {
-    .shop-range__grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.6rem;
-    }
     .shop-range__heading {
       font-size: 2.2rem;
+    }
+    .shop-range__grid > li {
+      flex: 0 0 22rem;
     }
   }
 
@@ -98,8 +111,10 @@
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
     }
     .shop-range__grid {
-      grid-template-columns: repeat({{ section.settings.columns_mobile }}, 1fr);
       gap: 1.2rem;
+    }
+    .shop-range__grid > li {
+      flex: 0 0 16rem;
     }
     .shop-range__name {
       font-size: 1.5rem;
@@ -115,6 +130,7 @@
     {%- endunless -%}
 
     {%- if section.blocks.size > 0 -%}
+      <div class="shop-range__scroll-wrapper">
       <ul class="shop-range__grid" role="list">
         {%- for block in section.blocks -%}
           {%- assign col = block.settings.collection -%}
@@ -168,6 +184,7 @@
           </li>
         {%- endfor -%}
       </ul>
+      </div>
     {%- endif -%}
 
   </div>
