@@ -13,6 +13,10 @@
     letter-spacing: -0.02em;
   }
 
+  .shop-range__carousel {
+    position: relative;
+  }
+
   .shop-range__scroll-wrapper {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -21,6 +25,58 @@
 
   .shop-range__scroll-wrapper::-webkit-scrollbar {
     display: none;
+  }
+
+  .shop-range__arrow {
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    border: 1.5px solid #d0d0d0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s, opacity 0.2s;
+    padding: 0;
+  }
+
+  .shop-range__arrow:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.16);
+  }
+
+  .shop-range__arrow[disabled] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .shop-range__arrow--prev {
+    left: -2.2rem;
+  }
+
+  .shop-range__arrow--next {
+    right: -2.2rem;
+  }
+
+  .shop-range__arrow svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    stroke: #1a1a1a;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media screen and (max-width: 749px) {
+    .shop-range__arrow {
+      display: none;
+    }
   }
 
   .shop-range__grid {
@@ -130,7 +186,14 @@
     {%- endunless -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="shop-range__scroll-wrapper">
+      <div class="shop-range__carousel">
+        <button class="shop-range__arrow shop-range__arrow--prev" aria-label="Scroll left" disabled>
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <button class="shop-range__arrow shop-range__arrow--next" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
+      <div class="shop-range__scroll-wrapper" id="shop-range-scroll-{{ section.id }}">
       <ul class="shop-range__grid" role="list">
         {%- for block in section.blocks -%}
           {%- assign col = block.settings.collection -%}
@@ -185,10 +248,36 @@
         {%- endfor -%}
       </ul>
       </div>
+      </div>
     {%- endif -%}
 
   </div>
 </div>
+
+{% javascript %}
+(function () {
+  var wrapper = document.getElementById('shop-range-scroll-{{ section.id }}');
+  if (!wrapper) return;
+  var carousel = wrapper.closest('.shop-range__carousel');
+  var prev = carousel.querySelector('.shop-range__arrow--prev');
+  var next = carousel.querySelector('.shop-range__arrow--next');
+  var step = wrapper.offsetWidth * 0.75;
+
+  function update() {
+    prev.disabled = wrapper.scrollLeft <= 1;
+    next.disabled = wrapper.scrollLeft + wrapper.offsetWidth >= wrapper.scrollWidth - 1;
+  }
+
+  prev.addEventListener('click', function () {
+    wrapper.scrollBy({ left: -step, behavior: 'smooth' });
+  });
+  next.addEventListener('click', function () {
+    wrapper.scrollBy({ left: step, behavior: 'smooth' });
+  });
+  wrapper.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+{% endjavascript %}
 
 {% schema %}
 {
