@@ -254,14 +254,15 @@
   </div>
 </div>
 
-{% javascript %}
+<script>
 (function () {
   var wrapper = document.getElementById('shop-range-scroll-{{ section.id }}');
   if (!wrapper) return;
   var carousel = wrapper.closest('.shop-range__carousel');
   var prev = carousel.querySelector('.shop-range__arrow--prev');
   var next = carousel.querySelector('.shop-range__arrow--next');
-  var step = wrapper.offsetWidth * 0.75;
+
+  function getStep() { return wrapper.offsetWidth * 0.75; }
 
   function update() {
     prev.disabled = wrapper.scrollLeft <= 1;
@@ -269,15 +270,15 @@
   }
 
   prev.addEventListener('click', function () {
-    wrapper.scrollBy({ left: -step, behavior: 'smooth' });
+    wrapper.scrollBy({ left: -getStep(), behavior: 'smooth' });
   });
   next.addEventListener('click', function () {
-    wrapper.scrollBy({ left: step, behavior: 'smooth' });
+    wrapper.scrollBy({ left: getStep(), behavior: 'smooth' });
   });
   wrapper.addEventListener('scroll', update, { passive: true });
   update();
 })();
-{% endjavascript %}
+</script>
 
 {% schema %}
 {
